@@ -18,4 +18,10 @@ enum class Direction(val int: Int) {
     BottomLeft(6),
     Left(7),
     TopLeft(8),
+    ;
+    companion object {
+        fun of(dx: Int, dy: Int): Direction {
+            TODO()
+        }
+    }
 }
