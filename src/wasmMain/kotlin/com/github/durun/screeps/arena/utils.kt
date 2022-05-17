@@ -6,7 +6,7 @@ import com.github.durun.screeps.arena.jsinterop.toHeapUint8
 import kotlinx.cinterop.getBytes
 import kotlinx.cinterop.utf16
 
-fun List<RoomPosition>.toHeap() {
+internal fun List<RoomPosition>.toHeap() {
     this.forEachIndexed { i, position ->
         if (position is GameObject) {
             toHeapInt32(i * 2, -1)
@@ -21,7 +21,7 @@ fun List<RoomPosition>.toHeap() {
 /**
  * @return byte size
  */
-fun String.toHeapUTF16(offset: Int): Int {
+internal fun String.toHeapUTF16(offset: Int): Int {
     val bytes = this.utf16.getBytes()
     bytes.forEachIndexed { i, byte ->
         toHeapUint8(offset + i, byte)
@@ -29,7 +29,7 @@ fun String.toHeapUTF16(offset: Int): Int {
     return bytes.size
 }
 
-fun fromHeapUTF8(offset: Int, size: Int): String {
+internal fun fromHeapUTF8(offset: Int, size: Int): String {
     val bytes = ByteArray(size) { getHeapUint8(it + offset) }
     return bytes.decodeToString()
 }

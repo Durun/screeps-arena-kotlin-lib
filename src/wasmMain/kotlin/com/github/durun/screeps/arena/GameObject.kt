@@ -25,7 +25,7 @@ abstract class GameObject(
         return id.hashCode()
     }
 
-    inline fun <reified T : RoomPosition> findClosestByPath(
+    fun <T : RoomPosition> findClosestByPath(
         targets: List<T>,
         costMatrix: CostMatrix? = null,
         plainCost: Int? = null,
@@ -51,14 +51,14 @@ abstract class GameObject(
         else null
     }
 
-    inline fun <reified T : RoomPosition> findClosestByRange(targets: List<T>): T? {
+    fun <T : RoomPosition> findClosestByRange(targets: List<T>): T? {
         targets.toHeap()
         val result = findClosestByRange(this.index, targets.size)
         return if (0 <= result) targets[result]
         else null
     }
 
-    inline fun <reified T : RoomPosition> findInRange(targets: List<T>, range: Double): List<T> {
+    fun <T : RoomPosition> findInRange(targets: List<T>, range: Double): List<T> {
         targets.toHeap()
         val resultSize = findInRange(this.index, targets.size, range)
         return (0 until resultSize).map { targets[getHeapInt32(it)] }

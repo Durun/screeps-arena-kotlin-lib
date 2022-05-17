@@ -1,5 +1,13 @@
 package com.github.durun.screeps.arena
 
+val MOVE = BodyType.MOVE
+val WORK = BodyType.WORK
+val CARRY = BodyType.CARRY
+val ATTACK = BodyType.ATTACK
+val RANGED_ATTACK = BodyType.RANGED_ATTACK
+val HEAL = BodyType.HEAL
+val TOUGH = BodyType.TOUGH
+
 enum class BodyType(val int: Int) {
     MOVE(0),
     WORK(1),
@@ -11,7 +19,7 @@ enum class BodyType(val int: Int) {
     ;
 
     companion object {
-        fun of(int: Int): BodyType = when (int) {
+        internal fun of(int: Int): BodyType = when (int) {
             0 -> MOVE
             1 -> WORK
             2 -> CARRY
@@ -26,4 +34,4 @@ enum class BodyType(val int: Int) {
     }
 }
 
-data class BodyPart(val type: BodyType, val hits: Int)
+data class BodyPart internal constructor(val type: BodyType, val hits: Int)

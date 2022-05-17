@@ -18,7 +18,7 @@ enum class Err(val code: Int) {
     companion object {
         fun of(int: Int): Err? {
             return if (int==0) null
-            else Err.values().find { it.code == int }
+            else values().find { it.code == int }
                 ?: throw Exception("Illegal number of ReturnCode: $int")
         }
     }

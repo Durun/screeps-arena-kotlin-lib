@@ -1,5 +1,14 @@
 package com.github.durun.screeps.arena
 
+val TOP = Direction.Top
+val TOP_RIGHT = Direction.TopRight
+val RIGHT = Direction.Right
+val BOTTOM_RIGHT = Direction.BottomRight
+val BOTTOM = Direction.Bottom
+val BOTTOM_LEFT = Direction.BottomLeft
+val LEFT = Direction.Left
+val TOP_LEFT = Direction.TopLeft
+
 enum class Direction(val int: Int) {
     Top(1),
     TopRight(2),
