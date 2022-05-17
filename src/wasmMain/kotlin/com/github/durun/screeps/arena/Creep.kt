@@ -10,10 +10,6 @@ class Creep internal constructor(index: Int) : GameObject(index) {
         }
     }
 
-    val my: Boolean by lazy { creepMy(this.index) }
-    val hits: Int get() = creepHits(this.index)
-    val hitsMax: Int by lazy { creepHitsMax(this.index) }
-    val fatigue: Int get() = creepFatigue(this.index)
     val body: List<BodyPart>
         get() {
             val size = creepBody_heap(this.index)
@@ -24,8 +20,37 @@ class Creep internal constructor(index: Int) : GameObject(index) {
                 )
             }
         }
-
+    val fatigue: Int get() = creepFatigue(this.index)
+    val hits: Int get() = creepHits(this.index)
+    val hitsMax: Int by lazy { creepHitsMax(this.index) }
+    val my: Boolean by lazy { creepMy(this.index) }
     val store: Store = Store(this.index)
+
+    fun attack(target: Creep): Err? = attackToAny(target)
+    fun attack(target: Structure): Err? = attackToAny(target)
+    private fun attackToAny(target: GameObject): Err? {
+        val code = creepAttack(this.index, target.index)
+        return Err.of(code)
+    }
+
+    fun build(target: ConstructionSite<*>): Err? {
+        val code = creepBuild(this.index, target.index)
+        return Err.of(code)
+    }
+
+    fun drop(resourceType: String = RESOURCE_ENERGY, amount: Int? = null): Err? {
+        TODO()
+    }
+
+    fun harvest(target: Source): Err? {
+        val code = creepHarvest(this.index, target.index)
+        return Err.of(code)
+    }
+
+    fun heal(target: Creep): Err? {
+        val code = creepHeal(this.index, target.index)
+        return Err.of(code)
+    }
 
     fun move(direction: Direction): Err? {
         val code = creepMove(this.index, direction.int)
@@ -42,11 +67,12 @@ class Creep internal constructor(index: Int) : GameObject(index) {
         return Err.of(code)
     }
 
-    fun attack(target: Creep): Err? = attackToAny(target)
-    fun attack(target: Structure): Err? = attackToAny(target)
-    private fun attackToAny(target: GameObject): Err? {
-        val code = creepAttack(this.index, target.index)
-        return Err.of(code)
+    fun pickup(target: Resource): Err? {
+        TODO()
+    }
+
+    fun pull(target: Creep): Err? {
+        TODO()
     }
 
     fun rangedAttack(target: Creep): Err? = rangedAttackToAny(target)
@@ -56,19 +82,12 @@ class Creep internal constructor(index: Int) : GameObject(index) {
         return Err.of(code)
     }
 
-    fun build(target: ConstructionSite<*>): Err? {
-        val code = creepBuild(this.index, target.index)
-        return Err.of(code)
+    fun rangedHeal(target: Creep): Err? {
+        TODO()
     }
 
-    fun harvest(target: Source): Err? {
-        val code = creepHarvest(this.index, target.index)
-        return Err.of(code)
-    }
-
-    fun heal(target: Creep): Err? {
-        val code = creepHeal(this.index, target.index)
-        return Err.of(code)
+    fun rangedMassAttack(): Err? {
+        TODO()
     }
 
     private fun transferToAny(target: GameObject, resourceType: String = RESOURCE_ENERGY, amount: Int? = null): Err? {
