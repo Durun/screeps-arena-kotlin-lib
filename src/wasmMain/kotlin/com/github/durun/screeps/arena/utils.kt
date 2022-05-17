@@ -1,10 +1,10 @@
 package com.github.durun.screeps.arena
 
-import kotlinx.cinterop.getBytes
-import kotlinx.cinterop.utf16
 import com.github.durun.screeps.arena.jsinterop.getHeapUint8
 import com.github.durun.screeps.arena.jsinterop.toHeapInt32
 import com.github.durun.screeps.arena.jsinterop.toHeapUint8
+import kotlinx.cinterop.getBytes
+import kotlinx.cinterop.utf16
 
 fun List<RoomPosition>.toHeap() {
     this.forEachIndexed { i, position ->
@@ -32,14 +32,4 @@ fun String.toHeapUTF16(offset: Int): Int {
 fun fromHeapUTF8(offset: Int, size: Int): String {
     val bytes = ByteArray(size) { getHeapUint8(it + offset) }
     return bytes.decodeToString()
-}
-
-fun Structure.toInt(): Int = when(this) {
-    is Container -> 1
-    // is Extension -> 2
-    // is Rampart -> 3
-    is Spawn -> 4
-    is Tower -> 5
-    // is Wall -> 6
-    else -> throw IllegalArgumentException(this::class.simpleName)
 }

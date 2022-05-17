@@ -6,7 +6,7 @@ import com.github.durun.screeps.arena.jsinterop.storeGetFreeCapacity
 import com.github.durun.screeps.arena.jsinterop.storeGetUsedCapacity
 
 
-class Store(private val objIndex: Int) {
+class Store internal constructor(private val objIndex: Int) {
     val energy: Int get() = getStore(this.objIndex, -1)
     operator fun get(resourceType: String): Int {
         val len = resourceType.toHeapUTF16(0)
