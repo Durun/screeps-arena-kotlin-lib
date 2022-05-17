@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 enum class BodyType(val int: Int) {
     MOVE(0),

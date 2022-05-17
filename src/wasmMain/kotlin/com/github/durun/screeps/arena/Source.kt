@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 import com.github.durun.screeps.arena.jsinterop.getHeapInt32
 import com.github.durun.screeps.arena.jsinterop.getSources_heap

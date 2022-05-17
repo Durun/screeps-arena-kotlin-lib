@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 interface RoomPosition {
     val x: Int

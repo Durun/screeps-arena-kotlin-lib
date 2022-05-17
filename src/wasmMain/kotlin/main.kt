@@ -1,10 +1,4 @@
-import kotlinx.cinterop.getBytes
-import kotlinx.cinterop.utf16
-import kotlinx.wasm.jsinterop.allocateArena
-import kotlinx.wasm.jsinterop.freeArena
-import kotlinx.wasm.jsinterop.pushIntToArena
-import lib.*
-import com.github.durun.screeps.arena.jsinterop.*
+import com.github.durun.screeps.arena.*
 
 
 var time = 0

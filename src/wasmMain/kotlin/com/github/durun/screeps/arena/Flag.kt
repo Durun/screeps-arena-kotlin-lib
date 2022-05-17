@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 import com.github.durun.screeps.arena.jsinterop.getFlags_heap
 import com.github.durun.screeps.arena.jsinterop.getHeapInt32

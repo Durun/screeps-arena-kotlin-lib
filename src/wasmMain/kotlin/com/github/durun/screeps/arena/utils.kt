@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 import kotlinx.cinterop.getBytes
 import kotlinx.cinterop.utf16

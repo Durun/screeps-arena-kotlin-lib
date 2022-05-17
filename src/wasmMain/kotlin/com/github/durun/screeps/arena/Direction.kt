@@ -1,4 +1,4 @@
-package lib
+package com.github.durun.screeps.arena
 
 enum class Direction(val int: Int) {
     Top(1),
