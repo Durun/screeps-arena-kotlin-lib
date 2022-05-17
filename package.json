@@ -1,0 +1,7 @@
+{
+  "name": "screeps-arena-kotlin-wasm",
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/screeps-arena": "0.0.1"
+  }
+}
