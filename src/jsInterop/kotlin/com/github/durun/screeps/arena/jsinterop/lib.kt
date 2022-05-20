@@ -18,38 +18,11 @@ external fun toHeapInt32(index: Int, value: Int): Unit
 @SymbolName("getHeapInt32")
 external fun getHeapInt32(index: Int): Int
 
-@SymbolName("log_arena_all")
-external public fun logArenaAll(): Unit
-
-@SymbolName("log_number")
-external public fun logInt(value: Int): Unit
-
-@SymbolName("log_char")
-external public fun logChar(value: Char): Unit
-
-@SymbolName("log_bool")
-external public fun logBoolean(value: Boolean): Unit
-
-@SymbolName("log_number2")
-external public fun logDouble(value: Double): Unit
-
-@SymbolName("logString")
-external public fun logArenaAsString(arena: Arena, byteLength: Int): Unit
-
-@SymbolName("log_arena")
-external public fun logArena(arena: Arena): Unit
-
 @SymbolName("arenaLength")
 external public fun arenaLength(arena: Arena): Int
 
 @SymbolName("getNumberFromArena")
 external public fun getIntFromArena(arena: Arena, index: Int): Int
-
-@SymbolName("sampleArray")
-external public fun sampleArray(): Arena
-
-@SymbolName("sampleString")
-external public fun sampleString(): Int
 
 /**************************************** game/utils ****************************************/
 @SymbolName("getCreeps")

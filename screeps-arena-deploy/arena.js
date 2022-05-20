@@ -298,54 +298,6 @@ export const dependencies = {
         return heapInt32[index];
     },
     /**
-     * @param {number}index
-     * @param {number}byteLength
-     */
-    logHeapAsString: function (index, byteLength) {
-        const str = fromHeapUTF16(index, byteLength);
-        console.log(str);
-    },
-    /**
-     * @param {number}v
-     */
-    log_number: function (v) {
-        console.log(v);
-    },
-    /**
-     * @param {number}v
-     */
-    log_number2: function (v) {
-        console.log(v);
-    },
-    /**
-     * @param {number}v
-     */
-    log_char: function (v) {
-        console.log(String.fromCharCode(v));
-    },
-    /**
-     * @param {number}v
-     */
-    log_bool: function (v) {
-        console.log(!!v);
-    },
-
-    logString: function (heapIndex, byteLength) {
-        const str = fromHeapUTF16(heapIndex, byteLength);
-        console.log(str);
-    },
-    /**
-     * @param {number}arenaIndex
-     */
-    log_arena: function (arenaIndex) {
-        const arena = konan_dependencies.env.arenas.get(arenaIndex);
-        console.log(arena);
-    },
-    log_arena_all: function () {
-        console.log(konan_dependencies.env.arenas);
-    },
-
-    /**
      * @param {number}arenaIndex
      * @return {number}
      */
@@ -361,19 +313,6 @@ export const dependencies = {
     getNumberFromArena: function (arenaIndex, objectIndex) {
         const arena = konan_dependencies.env.arenas.get(arenaIndex);
         return arena[objectIndex];
-    },
-    /**
-     * @return {number}
-     */
-    sampleArray: function () {
-        return allocateArena([1, 1, 4, 5, 1, 4]);
-    },
-    /**
-     * @return {number} length of bytes
-     */
-    sampleString: function () {
-        const str = "Sample";
-        return toHeapUTF8(str, 0);
     },
     /**************************************** game/utils ****************************************/
     /**
