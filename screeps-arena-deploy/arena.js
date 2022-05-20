@@ -14,6 +14,7 @@ import {ATTACK, CARRY, HEAL, MOVE, RANGED_ATTACK, RESOURCE_ENERGY, TOUGH, WORK} 
 import {CostMatrix} from "game/path-finder";
 import {Visual} from "game/visual";
 import {createConstructionSite, getCpuTime, getTerrainAt, getTicks} from "game/utils";
+import {arenaInfo} from "game";
 // import {Flag} from "arena/prototypes";
 
 const heapUint8 = new Uint8Array(131072);
@@ -313,6 +314,45 @@ export const dependencies = {
     getNumberFromArena: function (arenaIndex, objectIndex) {
         const arena = konan_dependencies.env.arenas.get(arenaIndex);
         return arena[objectIndex];
+    },
+    /**************************************** arenaInfo ****************************************/
+    /**
+     * @return {number} byte length
+     * heapUint8 = name
+     */
+    arenaInfoName() {
+        return toHeapUTF8(arenaInfo.name, 0);
+    },
+    /**
+     * @return {number}
+     */
+    arenaInfoLevel() {
+        return arenaInfo.level;
+    },
+    /**
+     * @return {number} byte length
+     * heapUint8 = season
+     */
+    arenaInfoSeason() {
+        return toHeapUTF8(arenaInfo.season, 0);
+    },
+    /**
+     * @return {number} Game ticks limit.
+     */
+    arenaInfoTicksLimit() {
+        return arenaInfo.ticksLimit
+    },
+    /**
+     * @return {number} CPU wall time execution limit per one tick (except the first tick).
+     */
+    arenaInfoCpuTimeLimit() {
+        return arenaInfo.cpuTimeLimit
+    },
+    /**
+     * @return {number} CPU wall time limit on the first tick.
+     */
+    arenaInfoCpuTimeLimitFirstTick() {
+        return arenaInfo.cpuTimeLimitFirstTick
     },
     /**************************************** game/utils ****************************************/
     /**

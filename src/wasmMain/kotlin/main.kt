@@ -1,4 +1,4 @@
-import com.github.durun.screeps.arena.*
+import com.github.durun.screeps.arena.ArenaInfo
 
 
 var time = 0
@@ -160,7 +160,13 @@ fun main() {
 
 
 fun main() {
-    println("getCpuTime: ${getCpuTime()}")
-    println("getTicks: ${getTicks()}")
-    println("getTerrain: ${getTerrainAt(0, 0)}")
+    println("ArenaInfo")
+    println("""
+        name: ${ArenaInfo.name}
+        level: ${ArenaInfo.level}
+        season: ${ArenaInfo.season}
+        ticksLimit: ${ArenaInfo.ticksLimit}
+        cpuTimeLimit: ${ArenaInfo.cpuTimeLimit}
+        cpuTimeLimitFirstTick: ${ArenaInfo.cpuTimeLimitFirstTick}
+    """.trimIndent())
 }

@@ -24,6 +24,25 @@ external public fun arenaLength(arena: Arena): Int
 @SymbolName("getNumberFromArena")
 external public fun getIntFromArena(arena: Arena, index: Int): Int
 
+/**************************************** arenaInfo ****************************************/
+@SymbolName("arenaInfoName")
+external fun arenaInfoName(): Int
+
+@SymbolName("arenaInfoLevel")
+external fun arenaInfoLevel(): Int
+
+@SymbolName("arenaInfoSeason")
+external fun arenaInfoSeason(): Int
+
+@SymbolName("arenaInfoTicksLimit")
+external fun arenaInfoTicksLimit(): Int
+
+@SymbolName("arenaInfoCpuTimeLimit")
+external fun arenaInfoCpuTimeLimit(): Int
+
+@SymbolName("arenaInfoCpuTimeLimitFirstTick")
+external fun arenaInfoCpuTimeLimitFirstTick(): Int
+
 /**************************************** game/utils ****************************************/
 @SymbolName("getCreeps")
 external fun getCreeps_heap(): Int
