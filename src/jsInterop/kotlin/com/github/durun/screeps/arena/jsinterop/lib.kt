@@ -280,3 +280,13 @@ external fun visualText(
     aling: Int,
     opacity: Float
 ): Unit
+
+/**************************************** Functions ****************************************/
+@SymbolName("getCpuTime")
+external fun getCpuTime(): Int
+
+@SymbolName("getTerrainAt")
+external fun getTerrainAt(x: Int, y: Int): Int
+
+@SymbolName("getTicks")
+external fun getTicks(): Int

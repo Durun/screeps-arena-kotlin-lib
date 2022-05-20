@@ -1,9 +1,12 @@
 package com.github.durun.screeps.arena
 
-fun getCpuTime(): Long {
-    TODO()
-}
 
+/**
+ * Get CPU wall time elapsed in the current tick in nanoseconds.
+ */
+fun getCpuTime(): Int {
+    return com.github.durun.screeps.arena.jsinterop.getCpuTime()
+}
 
 class HeapStatistics
 
@@ -17,7 +20,8 @@ enum class Terrain(val int: Int) {
     ;
 
     companion object {
-        fun of(int: Int) = when (int) {
+        fun of(int: Int): Terrain? = when (int) {
+            0 -> null
             1 -> Wall
             2 -> Swamp
             else -> throw IllegalArgumentException("Terrain.of(): int=$int")
@@ -26,9 +30,13 @@ enum class Terrain(val int: Int) {
 }
 
 fun getTerrainAt(x: Int, y: Int): Terrain? {
-    TODO()
+    val code = com.github.durun.screeps.arena.jsinterop.getTerrainAt(x, y)
+    return Terrain.of(code)
 }
 
+/**
+ * Get count of game ticks passed since the start of the game
+ */
 fun getTicks(): Int {
-    TODO()
+    return com.github.durun.screeps.arena.jsinterop.getTicks()
 }

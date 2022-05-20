@@ -130,6 +130,7 @@ fun main() {
 }
  */
 
+/*
 // construction
 
 val creep = Creep.getAll().first {
@@ -154,4 +155,12 @@ fun main() {
             }
         }
     }
+}
+ */
+
+
+fun main() {
+    println("getCpuTime: ${getCpuTime()}")
+    println("getTicks: ${getTicks()}")
+    println("getTerrain: ${getTerrainAt(0, 0)}")
 }

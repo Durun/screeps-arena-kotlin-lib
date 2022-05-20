@@ -7,12 +7,13 @@ import {
     StructureExtension,
     StructureRampart,
     StructureSpawn,
-    StructureTower, StructureWall
+    StructureTower,
+    StructureWall
 } from "game/prototypes";
 import {ATTACK, CARRY, HEAL, MOVE, RANGED_ATTACK, RESOURCE_ENERGY, TOUGH, WORK} from "game/constants";
 import {CostMatrix} from "game/path-finder";
 import {Visual} from "game/visual";
-import {createConstructionSite} from "game/utils";
+import {createConstructionSite, getCpuTime, getTerrainAt, getTicks} from "game/utils";
 // import {Flag} from "arena/prototypes";
 
 const heapUint8 = new Uint8Array(131072);
@@ -425,7 +426,7 @@ export const dependencies = {
      * @return {ERR_INVALID_ARGS|ERR_INVALID_TARGET|ERR_FULL|number}
      */
     createConstructionSite: function (x, y, type) {
-        const result = createConstructionSite(x,y, intToPrototype(type));
+        const result = createConstructionSite(x, y, intToPrototype(type));
         if (result.object) {
             gameObjects.push(result.object);
             return gameObjects.length - 1;
@@ -1073,7 +1074,18 @@ export const dependencies = {
             opacity: (0 <= opacity) ? opacity : undefined,
         };
         visuals[index].text(text, {x: x, y: y}, style);
-    }
+    },
+    /**************************************** Functions ****************************************/
+    getCpuTime: getCpuTime,
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @return {0|TERRAIN_WALL|TERRAIN_SWAMP}
+     */
+    getTerrainAt: function (x, y) {
+        return getTerrainAt({x: x, y: y});
+    },
+    getTicks: getTicks
 }
 
 /**
