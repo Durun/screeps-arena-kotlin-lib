@@ -90,7 +90,8 @@ class Creep internal constructor(index: Int) : GameObject(index) {
     }
 
     fun rangedHeal(target: Creep): Err? {
-        TODO()
+        val code = creepRangedHeal(this.index, target.index)
+        return Err.of(code)
     }
 
     fun rangedMassAttack(): Err? {

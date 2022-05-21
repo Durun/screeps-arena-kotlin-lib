@@ -715,6 +715,16 @@ export const dependencies = {
     /**
      * @param {number}creepIndex
      * @param {number}targetIndex
+     * @return {CreepActionReturnCode}
+     */
+    creepRangedHeal(creepIndex, targetIndex) {
+        /** @type {Creep} */
+        const target = gameObjects[targetIndex];
+        return gameObjects[creepIndex].rangedHeal(target)
+    },
+    /**
+     * @param {number}creepIndex
+     * @param {number}targetIndex
      * @param {number|-1}resourceLength
      * when positive: heapUint8 = resource (UTF16),
      * -1=RESOURCE_ENERGY
