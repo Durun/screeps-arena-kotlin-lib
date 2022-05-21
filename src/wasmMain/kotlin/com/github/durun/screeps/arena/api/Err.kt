@@ -1,4 +1,4 @@
-package com.github.durun.screeps.arena
+package com.github.durun.screeps.arena.api
 
 enum class Err(val code: Int) {
     // Ok(0), -> null

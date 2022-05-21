@@ -1,4 +1,4 @@
-package com.github.durun.screeps.arena
+package com.github.durun.screeps.arena.api
 
 import com.github.durun.screeps.arena.jsinterop.getExtensions_heap
 import com.github.durun.screeps.arena.jsinterop.getHeapInt32

@@ -1,6 +1,6 @@
 package com.github.durun.screeps.arena.utils
 
-import com.github.durun.screeps.arena.Err
+import com.github.durun.screeps.arena.api.Err
 
 open class ScreepsResult<out T>(protected val value: T?, protected val err: Err?) {
     val isSuccess: Boolean get() = (value != null && err == null)
