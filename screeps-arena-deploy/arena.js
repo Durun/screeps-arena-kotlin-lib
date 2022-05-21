@@ -705,6 +705,16 @@ export const dependencies = {
     /**
      * @param {number}creepIndex
      * @param {number}targetIndex
+     * @return {OK | ERR_NOT_OWNER | ERR_BUSY | ERR_INVALID_TARGET | ERR_NOT_IN_RANGE | ERR_NO_BODYPART}
+     */
+    creepPull(creepIndex, targetIndex) {
+        /** @type {Creep} */
+        const target = gameObjects[targetIndex];
+        return gameObjects[creepIndex].pull(target);
+    },
+    /**
+     * @param {number}creepIndex
+     * @param {number}targetIndex
      * @param {number|-1}resourceLength
      * when positive: heapUint8 = resource (UTF16),
      * -1=RESOURCE_ENERGY

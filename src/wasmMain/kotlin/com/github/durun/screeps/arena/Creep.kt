@@ -78,7 +78,8 @@ class Creep internal constructor(index: Int) : GameObject(index) {
     }
 
     fun pull(target: Creep): Err? {
-        TODO()
+        val code = creepPull(this.index, target.index)
+        return Err.of(code)
     }
 
     fun rangedAttack(target: Creep): Err? = rangedAttackToAny(target)
