@@ -168,6 +168,9 @@ external fun creepPull(creepIndex: Int, targetIndex: Int): Int
 @SymbolName("creepRangedHeal")
 external fun creepRangedHeal(creepIndex: Int, targetIndex: Int): Int
 
+@SymbolName("creepRangedMassAttack")
+external fun creepRangedMassAttack(creepIndex: Int): Int
+
 @SymbolName("creepTransfer")
 external fun creepTransfer(creepIndex: Int, targetIndex: Int, resourceLength: Int, amount: Int): Int
 

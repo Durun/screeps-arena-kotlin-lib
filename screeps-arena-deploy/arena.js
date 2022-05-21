@@ -720,7 +720,14 @@ export const dependencies = {
     creepRangedHeal(creepIndex, targetIndex) {
         /** @type {Creep} */
         const target = gameObjects[targetIndex];
-        return gameObjects[creepIndex].rangedHeal(target)
+        return gameObjects[creepIndex].rangedHeal(target);
+    },
+    /**
+     * @param {number}creepIndex
+     * @return {OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NO_BODYPART}
+     */
+    creepRangedMassAttack(creepIndex) {
+        return gameObjects[creepIndex].rangedMassAttack()
     },
     /**
      * @param {number}creepIndex

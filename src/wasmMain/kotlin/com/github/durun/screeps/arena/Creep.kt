@@ -95,7 +95,8 @@ class Creep internal constructor(index: Int) : GameObject(index) {
     }
 
     fun rangedMassAttack(): Err? {
-        TODO()
+        val code = creepRangedMassAttack(this.index)
+        return Err.of(code)
     }
 
     private fun transferToAny(target: GameObject, resourceType: String = RESOURCE_ENERGY, amount: Int? = null): Err? {
