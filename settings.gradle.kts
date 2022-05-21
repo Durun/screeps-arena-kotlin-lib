@@ -8,4 +8,4 @@ pluginManagement {
     }
 }
 rootProject.name = "screeps-arena-kotlin"
-
+include("lib", "tutorial-final-test")

@@ -41,6 +41,7 @@ kotlin {
 tasks {
     // interop
     val jsInterop by creating(Exec::class) {
+        group = "develop"
         workingDir("./")
         executable("${project.properties["konanHome"]}/bin/kotlinc-native")
 
@@ -56,7 +57,7 @@ tasks {
         )
     }
     val compileKotlinWasm by getting {
-        // dependsOn(jsInterop)
+        dependsOn(jsInterop)
     }
 
     // npm
@@ -71,31 +72,5 @@ tasks {
         doLast {
             delete("node_modules")
         }
-    }
-
-    // Deploy
-    val linkReleaseExecutableWasm by getting
-    val copyBin by creating(Copy::class) {
-        dependsOn(linkReleaseExecutableWasm)
-        from(buildDir.resolve("bin/wasm"))
-        into(buildDir.resolve("bin/wasm"))
-        eachFile {
-            if (file.extension != "wasm") exclude()
-        }
-        rename { "${it}.bin" }
-    }
-    val copyBinToDeployDir by creating(Copy::class) {
-        dependsOn(copyBin)
-        from(buildDir.resolve("bin/wasm/releaseExecutable/${project.name.replace('-', '_')}.wasm.bin"))
-        into(projectDir.resolve("screeps-arena-deploy"))
-        rename { "wasm.bin" }
-    }
-    val deploy by creating {
-        group = "screeps"
-        dependsOn(copyBinToDeployDir)
-    }
-    val build by getting {
-        dependsOn(jsInterop)
-        dependsOn(deploy)
     }
 }
