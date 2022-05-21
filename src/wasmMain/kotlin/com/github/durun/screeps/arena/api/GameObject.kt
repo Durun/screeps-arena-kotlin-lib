@@ -9,20 +9,31 @@ abstract class GameObject(
     val ticksToDecay: Int? get() = getTicksToDecay(this.index).let { if (0 <= it) it else null }
     override val x: Int get() = getX(this.index)
     override val y: Int get() = getY(this.index)
-    val id: String by lazy {
+
+    private fun fetchId(): String? {
         val size = getId(this.index)
-        ByteArray(size) { getHeapUint8(it) }
-            .decodeToString()
+        return if (0 < size) ByteArray(size) { getHeapUint8(it) }.decodeToString()
+        else null
     }
+
+    private var _id: String? = null
+    val id: String?
+        get() {
+            return if (_id != null) _id
+            else {
+                _id = fetchId()
+                return _id
+            }
+        }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is GameObject) return false
-        return (this.id == other.id)
+        return (this.index == other.index)
     }
 
     override fun hashCode(): Int {
-        return id.hashCode()
+        return index
     }
 
     fun <T : RoomPosition> findClosestByPath(

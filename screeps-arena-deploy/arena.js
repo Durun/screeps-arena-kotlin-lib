@@ -457,10 +457,12 @@ export const dependencies = {
     },
     /**
      * @param {number}objIndex
-     * @return {number} byte length (UTF8)
+     * @return {number|-1} byte length (UTF8)
+     * returns -1 if id is undefined
      */
     getId: function (objIndex) {
         const id = gameObjects[objIndex].id;
+        if (id === undefined) return -1;
         return toHeapUTF8(id, 0);
     },
     /**
@@ -949,7 +951,7 @@ export const dependencies = {
             body.push(intToBodyType(heapInt32[i]));
         }
         const result = gameObjects[index].spawnCreep(body);
-        if (result.object) {
+        if (result.error === undefined) {
             gameObjects.push(result.object);
             return gameObjects.length - 1;
         } else {

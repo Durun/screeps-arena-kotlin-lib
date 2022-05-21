@@ -5,13 +5,14 @@ import com.github.durun.screeps.arena.jsinterop.getSpawns_heap
 import com.github.durun.screeps.arena.jsinterop.spawnCreep
 import com.github.durun.screeps.arena.jsinterop.toHeapInt32
 
-class Spawn internal constructor(index: Int): OwnedStructure(index) {
+class Spawn internal constructor(index: Int) : OwnedStructure(index) {
     companion object {
         fun getAll(): List<Spawn> {
             val size = getSpawns_heap()
             return (0 until size).map { Spawn(getHeapInt32(it)) }
         }
     }
+
     val store: Store = Store(this.index)
 
     fun spawnCreep(body: List<BodyType>): Pair<Creep?, Err?> {
