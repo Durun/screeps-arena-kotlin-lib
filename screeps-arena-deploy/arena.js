@@ -3,6 +3,7 @@ import * as game from "game";
 import {arenaInfo} from "game";
 import {
     Creep,
+    Resource,
     Source,
     StructureContainer,
     StructureExtension,
@@ -109,7 +110,7 @@ function toHeapUTF8(str, offset) {
 }
 
 /**
- * @param {_Constructor<Creep|Flag|Source|StructureContainer|StructureTower|StructureTower|StructureSpawn>}prototype
+ * @param {_Constructor<Creep|Flag|Resource|Source|StructureContainer|StructureTower|StructureTower|StructureSpawn>}prototype
  * @return {number}
  * heapInt32[0:return] : indices of objects
  */
@@ -359,6 +360,13 @@ export const dependencies = {
      */
     getContainers: function () {
         return getGameObjects(StructureContainer);
+    },
+    /**
+     * @return {number}
+     * heapInt32[0:return] : indices of resources
+     */
+    getResources() {
+        return getGameObjects(Resource);
     },
     /**
      * @return {number}
@@ -805,6 +813,22 @@ export const dependencies = {
             heapInt32[i * 2 + 1] = body.hits;
         });
         return creep.body.length;
+    },
+    /**************************************** Resource ****************************************/
+    /**
+     * @param {number}index
+     * @return {number} amount
+     */
+    resourceAmount(index) {
+        return gameObjects[index].amount;
+    },
+    /**
+     * @param {number}index
+     * @return {number} byte size
+     * heapUint8 = resourceType (UTF8)
+     */
+    resourceType(index) {
+        return toHeapUTF8(gameObjects[index].resourceType, 0);
     },
     /**************************************** Source ****************************************/
     sourceEnergy: function (index) {

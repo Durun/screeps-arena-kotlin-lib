@@ -50,6 +50,9 @@ external fun getCreeps_heap(): Int
 @SymbolName("getContainers")
 external fun getContainers_heap(): Int
 
+@SymbolName("getResources")
+external fun getResources_heap(): Int
+
 @SymbolName("getSources")
 external fun getSources_heap(): Int
 
@@ -179,6 +182,13 @@ external fun creepWithdraw(creepIndex: Int, targetIndex: Int, resourceLength: In
 
 @SymbolName("creepBody_heap")
 external fun creepBody_heap(creepIndex: Int): Int
+
+/**************************************** Resource ****************************************/
+@SymbolName("resourceAmount")
+external fun resourceAmount(index: Int): Int
+
+@SymbolName("resourceType")
+external fun resourceType(index: Int): Int
 
 /**************************************** Source ****************************************/
 @SymbolName("sourceEnergy")
