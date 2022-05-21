@@ -588,7 +588,9 @@ export const dependencies = {
      */
     getStore: function (objIndex, resourceLength) {
         const resource = (0 <= resourceLength) ? fromHeapUTF16(0, resourceLength) : RESOURCE_ENERGY;
-        return gameObjects[objIndex].store[resource];
+        const store = gameObjects[objIndex].store;
+        if (store === undefined) return 0;
+        return store[resource];
     },
     /**
      * @param {number}objIndex
@@ -601,7 +603,9 @@ export const dependencies = {
     storeGetCapacity: function (objIndex, resourceLength) {
         const resource = (0 < resourceLength) ? fromHeapUTF16(0, resourceLength)
             : (resourceLength === -1) ? RESOURCE_ENERGY : undefined;
-        return gameObjects[objIndex].store.getCapacity(resource);
+        const store = gameObjects[objIndex].store;
+        if (store === undefined) return 0;
+        return store.getCapacity(resource);
     },
     /**
      * @param {number}objIndex
@@ -614,7 +618,9 @@ export const dependencies = {
     storeGetFreeCapacity: function (objIndex, resourceLength) {
         const resource = (0 < resourceLength) ? fromHeapUTF16(0, resourceLength)
             : (resourceLength === -1) ? RESOURCE_ENERGY : undefined;
-        return gameObjects[objIndex].store.getFreeCapacity(resource);
+        const store = gameObjects[objIndex].store;
+        if (store === undefined) return 0;
+        return store.getFreeCapacity(resource);
     },
     /**
      * @param {number}objIndex
@@ -627,7 +633,9 @@ export const dependencies = {
     storeGetUsedCapacity: function (objIndex, resourceLength) {
         const resource = (0 < resourceLength) ? fromHeapUTF16(0, resourceLength)
             : (resourceLength === -1) ? RESOURCE_ENERGY : undefined;
-        return gameObjects[objIndex].store.getUsedCapacity(resource);
+        const store = gameObjects[objIndex].store;
+        if (store === undefined) return 0;
+        return store.getUsedCapacity(resource);
     },
     /**************************************** Creep ****************************************/
     /**

@@ -1,7 +1,9 @@
-import com.github.durun.screeps.arena.ArenaInfo
+import com.github.durun.screeps.arena.api.*
+import com.github.durun.screeps.arena.utils.attackCatching
+import com.github.durun.screeps.arena.utils.harvestCatching
+import com.github.durun.screeps.arena.utils.spawnCreepCatching
+import com.github.durun.screeps.arena.utils.transferCatching
 
-
-var time = 0
 
 /*
 // simple move
@@ -158,15 +160,94 @@ fun main() {
 }
  */
 
+// final test
 
+val spawn = Spawn.getAll().first { it.my }
+val source = Source.getAll().first()
+val miners: MutableList<Creep> = mutableListOf()
+val mining: MutableList<Boolean> = mutableListOf()
+val defenders: MutableList<Creep> = mutableListOf()
+val enemies = Creep.getAll().filter { !it.my }
+var target: Creep? = null
+val defenceRange = 10
 fun main() {
-    println("ArenaInfo")
-    println("""
-        name: ${ArenaInfo.name}
-        level: ${ArenaInfo.level}
-        season: ${ArenaInfo.season}
-        ticksLimit: ${ArenaInfo.ticksLimit}
-        cpuTimeLimit: ${ArenaInfo.cpuTimeLimit}
-        cpuTimeLimitFirstTick: ${ArenaInfo.cpuTimeLimitFirstTick}
-    """.trimIndent())
+
+    if (target == null) spawn.findClosestByRange(enemies)?.let { enemy ->
+        if (spawn.getRangeTo(enemy) < defenceRange * defenceRange) target = enemy
+    } else if (target?.exists == false) target = null
+
+    if (miners.isEmpty()) {
+        spawn.spawnCreepCatching(listOf(MOVE, CARRY, WORK, WORK, WORK, WORK))
+            .onSuccess {
+                miners.add(it)
+                mining.add(true)
+            }
+    } else {
+        spawn.spawnCreepCatching(listOf(MOVE, ATTACK, ATTACK, ATTACK))
+            .onSuccess { defenders.add(it) }
+    }
+
+    miners.forEachIndexed { i, creep ->
+        if (mining[i]) {
+            if (creep.store.getFreeCapacity() <= 0) mining[i] = false
+        } else {
+            if (creep.store.energy <= 0) mining[i] = true
+        }
+        if (mining[i]) {
+            creep.harvestCatching(source)
+                .on(Err.NotInRange) { creep.moveTo(source) }
+        } else {
+            creep.transferCatching(spawn)
+                .on(Err.NotInRange) { creep.moveTo(spawn) }
+        }
+    }
+
+    defenders.forEach { creep ->
+        target?.let { target ->
+            creep.attackCatching(target)
+                .on(Err.NotInRange) {
+                    creep.moveTo(target)
+                }
+        }
+    }
+
+    showVisual()
+    println("time: ${getCpuTime()}/${ArenaInfo.cpuTimeLimit}")
+}
+
+
+val font = TextStyle(
+    font = "32px",
+    opacity = 0.85f,
+    color = Color.of(0xBBDDFF),
+    bgColor = Color.of(0x111111),
+    padding = 0f
+)
+val style = Style(
+    stroke = Color.of(0xFFEE00),
+    strokeWidth = 0.05f,
+    opacity = 0.60f,
+    lineStyle = LineStyle.Dotted
+)
+val fillStyle = Style(
+    strokeWidth = 0f,
+    fill = Color.of(0xFF4400),
+    opacity = 0.1f,
+)
+
+fun showVisual() {
+    val visual = Visual.new(10, false)
+        .circle(spawn, defenceRange.toFloat(), fillStyle)
+        .text("Energy: ${spawn.store.energy}", spawn, font)
+
+    miners.zip(mining).forEach { (creep, mining) ->
+        if (mining) visual.text("Mining ${creep.store.energy}/${creep.store.getCapacity(RESOURCE_ENERGY)}", creep, font)
+        else visual.text("Transferring", creep, font)
+    }
+
+    target?.let { target ->
+        defenders.forEach { creep ->
+            visual.poly(creep.findPathTo(target), style)
+        }
+    }
 }

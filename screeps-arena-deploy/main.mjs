@@ -8,5 +8,5 @@ instantiate(WASM_BIN)
     });
 
 export function loop() {
-    console.log(entryPoint(1, 0));
+    const exitCode = entryPoint(1, 0);
 }
