@@ -22,7 +22,7 @@ const heapUint8 = new Uint8Array(131072);
 const heapInt32 = new Int32Array(4096);
 
 /**
- * @type {Array<GameObject|Creep|Flag|Source|Resource|ConstructionSite|Structure|OwnedStructure|StructureTower|StructureSpawn>}
+ * @type {Array<GameObject|Creep|Flag|Source|Resource|ConstructionSite|Structure|OwnedStructure|StructureTower|StructureSpawn|StructureRampart|StructureExtension|StructureWall>}
  */
 const gameObjects = [];
 /**
@@ -110,7 +110,7 @@ function toHeapUTF8(str, offset) {
 }
 
 /**
- * @param {_Constructor<Creep|Flag|Resource|Source|StructureContainer|StructureTower|StructureTower|StructureSpawn>}prototype
+ * @param {_Constructor<Creep|Flag|Resource|Source|StructureContainer|StructureTower|StructureTower|StructureSpawn|StructureRampart|StructureExtension|StructureWall>}prototype
  * @return {number}
  * heapInt32[0:return] : indices of objects
  */
@@ -363,6 +363,20 @@ export const dependencies = {
     },
     /**
      * @return {number}
+     * heapInt32[0:return] : indices of extensions
+     */
+    getExtensions() {
+        return getGameObjects(StructureExtension);
+    },
+    /**
+     * @return {number}
+     * heapInt32[0:return] : indices of ramparts
+     */
+    getRamparts() {
+        return getGameObjects(StructureRampart);
+    },
+    /**
+     * @return {number}
      * heapInt32[0:return] : indices of resources
      */
     getResources() {
@@ -388,6 +402,13 @@ export const dependencies = {
      */
     getTowers: function () {
         return getGameObjects(StructureTower);
+    },
+    /**
+     * @return {number}
+     * heapInt32[0:return] : indices of walls
+     */
+    getWalls() {
+        return getGameObjects(StructureWall);
     },
     /**
      * @return {number}

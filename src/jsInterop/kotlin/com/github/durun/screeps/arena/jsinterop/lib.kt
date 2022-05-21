@@ -50,6 +50,12 @@ external fun getCreeps_heap(): Int
 @SymbolName("getContainers")
 external fun getContainers_heap(): Int
 
+@SymbolName("getExtensions")
+external fun getExtensions_heap(): Int
+
+@SymbolName("getRamparts")
+external fun getRamparts_heap(): Int
+
 @SymbolName("getResources")
 external fun getResources_heap(): Int
 
@@ -61,6 +67,9 @@ external fun getSpawns_heap(): Int
 
 @SymbolName("getTowers")
 external fun getTowers_heap(): Int
+
+@SymbolName("getWalls")
+external fun getWalls_heap(): Int
 
 @SymbolName("getFlags")
 external fun getFlags_heap(): Int
