@@ -56,7 +56,7 @@ tasks {
         )
     }
     val compileKotlinWasm by getting {
-        dependsOn(jsInterop)
+        // dependsOn(jsInterop)
     }
 
     // npm
@@ -74,9 +74,9 @@ tasks {
     }
 
     // Deploy
-    val wasmMainBinaries by getting
+    val linkReleaseExecutableWasm by getting
     val copyBin by creating(Copy::class) {
-        dependsOn(wasmMainBinaries)
+        dependsOn(linkReleaseExecutableWasm)
         from(buildDir.resolve("bin/wasm"))
         into(buildDir.resolve("bin/wasm"))
         eachFile {
@@ -95,6 +95,7 @@ tasks {
         dependsOn(copyBinToDeployDir)
     }
     val build by getting {
+        dependsOn(jsInterop)
         dependsOn(deploy)
     }
 }
