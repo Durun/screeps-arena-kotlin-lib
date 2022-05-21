@@ -1,5 +1,6 @@
 import {instantiateLinking, konan_dependencies} from "./kotlin.js";
 import * as game from "game";
+import {arenaInfo} from "game";
 import {
     Creep,
     Source,
@@ -14,7 +15,6 @@ import {ATTACK, CARRY, HEAL, MOVE, RANGED_ATTACK, RESOURCE_ENERGY, TOUGH, WORK} 
 import {CostMatrix} from "game/path-finder";
 import {Visual} from "game/visual";
 import {createConstructionSite, getCpuTime, getTerrainAt, getTicks} from "game/utils";
-import {arenaInfo} from "game";
 // import {Flag} from "arena/prototypes";
 
 const heapUint8 = new Uint8Array(131072);
@@ -106,15 +106,6 @@ function toHeapUTF8(str, offset) {
         }
     });
     return i - offset;
-}
-
-/**
- * @param {number}start
- * @param {number}length
- * @return {Int32Array}
- */
-function fromHeapInt32(start, length) {
-    return heapInt32.slice(start, start + length);
 }
 
 /**
@@ -666,6 +657,20 @@ export const dependencies = {
         /** @type {ConstructionSite} */
         const target = gameObjects[targetIndex];
         return gameObjects[creepIndex].build(target);
+    },
+    /**
+     * @param {number}creepIndex
+     * @param {number|-1}resourceLength
+     * when positive: heapUint8 = resource (UTF16),
+     * -1=RESOURCE_ENERGY
+     * @param {number}amount
+     * @return {OK | ERR_NOT_OWNER | ERR_BUSY | ERR_NOT_ENOUGH_RESOURCES}
+     */
+    creepDrop(creepIndex, resourceLength, amount) {
+        return gameObjects[creepIndex].drop(
+            (0 < resourceLength) ? fromHeapUTF16(0, resourceLength) : RESOURCE_ENERGY,
+            (amount !== -1) ? amount : undefined
+        );
     },
     /**
      * @param {number}creepIndex

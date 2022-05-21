@@ -39,7 +39,12 @@ class Creep internal constructor(index: Int) : GameObject(index) {
     }
 
     fun drop(resourceType: String = RESOURCE_ENERGY, amount: Int? = null): Err? {
-        TODO()
+        val code = creepDrop(
+            this.index,
+            if (resourceType == RESOURCE_ENERGY) -1 else resourceType.toHeapUTF16(0),
+            amount ?: -1
+        )
+        return Err.of(code)
     }
 
     fun harvest(target: Source): Err? {

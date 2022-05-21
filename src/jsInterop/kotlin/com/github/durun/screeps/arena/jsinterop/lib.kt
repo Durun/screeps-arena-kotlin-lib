@@ -150,6 +150,9 @@ external fun creepRangedAttack(creepIndex: Int, targetIndex: Int): Int
 @SymbolName("creepBuild")
 external fun creepBuild(creepIndex: Int, targetIndex: Int): Int
 
+@SymbolName("creepDrop")
+external fun creepDrop(creepIndex: Int, resourceLength: Int, amount: Int): Int
+
 @SymbolName("creepHarvest")
 external fun creepHarvest(creepIndex: Int, targetIndex: Int): Int
 
