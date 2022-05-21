@@ -73,7 +73,8 @@ class Creep internal constructor(index: Int) : GameObject(index) {
     }
 
     fun pickup(target: Resource): Err? {
-        TODO()
+        val code = creepPickup(this.index, target.index)
+        return Err.of(code)
     }
 
     fun pull(target: Creep): Err? {

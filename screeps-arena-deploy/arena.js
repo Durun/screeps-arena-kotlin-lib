@@ -21,7 +21,7 @@ const heapUint8 = new Uint8Array(131072);
 const heapInt32 = new Int32Array(4096);
 
 /**
- * @type {Array<GameObject|Creep|Flag|Source|ConstructionSite|Structure|OwnedStructure|StructureTower|StructureSpawn>}
+ * @type {Array<GameObject|Creep|Flag|Source|Resource|ConstructionSite|Structure|OwnedStructure|StructureTower|StructureSpawn>}
  */
 const gameObjects = [];
 /**
@@ -691,6 +691,16 @@ export const dependencies = {
         const creep = gameObjects[creepIndex];
         const target = gameObjects[targetIndex];
         return creep.heal(target);
+    },
+    /**
+     * @param {number}creepIndex
+     * @param {number}targetIndex
+     * @return {CreepActionReturnCode | ERR_FULL}
+     */
+    creepPickup(creepIndex, targetIndex) {
+        /** @type {Resource} */
+        const target = gameObjects[targetIndex];
+        return gameObjects[creepIndex].pickup(target);
     },
     /**
      * @param {number}creepIndex

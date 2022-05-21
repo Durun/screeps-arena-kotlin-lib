@@ -159,6 +159,9 @@ external fun creepHarvest(creepIndex: Int, targetIndex: Int): Int
 @SymbolName("creepHeal")
 external fun creepHeal(creepIndex: Int, targetIndex: Int): Int
 
+@SymbolName("creepPickup")
+external fun creepPickup(creepIndex: Int, targetIndex: Int): Int
+
 @SymbolName("creepTransfer")
 external fun creepTransfer(creepIndex: Int, targetIndex: Int, resourceLength: Int, amount: Int): Int
 
