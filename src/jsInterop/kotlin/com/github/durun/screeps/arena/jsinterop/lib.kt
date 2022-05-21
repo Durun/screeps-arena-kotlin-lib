@@ -292,6 +292,9 @@ external fun visualText(
 @SymbolName("getCpuTime")
 external fun getCpuTime(): Int
 
+@SymbolName("getDirection")
+external fun getDirection(x: Int, y: Int): Int
+
 @SymbolName("getTerrainAt")
 external fun getTerrainAt(x: Int, y: Int): Int
 

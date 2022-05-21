@@ -14,7 +14,7 @@ import {
 import {ATTACK, CARRY, HEAL, MOVE, RANGED_ATTACK, RESOURCE_ENERGY, TOUGH, WORK} from "game/constants";
 import {CostMatrix} from "game/path-finder";
 import {Visual} from "game/visual";
-import {createConstructionSite, getCpuTime, getTerrainAt, getTicks} from "game/utils";
+import {createConstructionSite, getCpuTime, getDirection, getTerrainAt, getTicks} from "game/utils";
 // import {Flag} from "arena/prototypes";
 
 const heapUint8 = new Uint8Array(131072);
@@ -1098,6 +1098,12 @@ export const dependencies = {
     },
     /**************************************** Functions ****************************************/
     getCpuTime: getCpuTime,
+    /**
+     * @param {number} x
+     * @param {number} y
+     * @return {DirectionConstant}
+     */
+    getDirection: getDirection,
     /**
      * @param {number} x
      * @param {number} y

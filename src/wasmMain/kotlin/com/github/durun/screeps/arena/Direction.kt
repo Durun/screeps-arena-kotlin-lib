@@ -1,5 +1,7 @@
 package com.github.durun.screeps.arena
 
+import com.github.durun.screeps.arena.jsinterop.getDirection
+
 val TOP = Direction.Top
 val TOP_RIGHT = Direction.TopRight
 val RIGHT = Direction.Right
@@ -19,9 +21,29 @@ enum class Direction(val int: Int) {
     Left(7),
     TopLeft(8),
     ;
+
     companion object {
-        fun of(dx: Int, dy: Int): Direction {
-            TODO()
+        fun of(dx: Int, dy: Int): Direction = when (getDirection(dx, dy)) {
+            1 -> Top
+            2 -> TopRight
+            3 -> Right
+            4 -> BottomRight
+            5 -> Bottom
+            6 -> BottomLeft
+            7 -> Left
+            8 -> TopLeft
+            else -> throw IllegalStateException("getDirection($dx, $dy) returns ${getDirection(dx, dy)}")
         }
+    }
+
+    operator fun unaryMinus(): Direction = when (this) {
+        Top -> Bottom
+        TopRight -> BottomLeft
+        Right -> Left
+        BottomRight -> TopLeft
+        Bottom -> Top
+        BottomLeft -> TopRight
+        Left -> Right
+        TopLeft -> BottomRight
     }
 }
