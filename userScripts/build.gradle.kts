@@ -1,7 +1,8 @@
-
 plugins {
     kotlin("multiplatform") version "1.5.20"
 }
+
+kotlin { wasm32 { binaries.executable() } } // Dummy setting for :userScripts
 
 buildscript {
     repositories {
@@ -52,6 +53,10 @@ subprojects { // SubProjects(:userScripts:*)
             from(project(":lib").projectDir.resolve("src/wasmMain/resources"))
             into(deployDir)
             eachFile { if (file.extension !in listOf("js", "mjs")) exclude() }
+            filter {
+                if (it == "/* ADDITIONAL IMPORTS */") additionalImports(project.ext)
+                else it
+            }
         }
         val deploy by creating {
             group = "screeps"
@@ -70,9 +75,8 @@ subprojects { // SubProjects(:userScripts:*)
     }
 }
 
-// Dummy settings for :userScripts
-kotlin {
-    wasm32("wasm") {
-        binaries.executable() // dummy
-    }
+fun additionalImports(ext: ExtraPropertiesExtension): String {
+    val builder = StringBuilder()
+    if (ext.properties["useFlag"] == true) builder.appendLine("""import {Flag} from "arena/prototypes";""")
+    return builder.toString()
 }

@@ -8,8 +8,8 @@ pluginManagement {
     }
 }
 rootProject.name = "screeps-arena-kotlin"
-include(
-    "lib",
-    "userscripts",
-    "userScripts:tutorial-final-test"
-)
+include("lib", "userScripts")
+// include user scripts
+rootProject.projectDir.resolve("userScripts")
+    .listFiles { it: File -> it.isDirectory && it.name != "build" }
+    .forEach { include("userScripts:${it.name}") }
