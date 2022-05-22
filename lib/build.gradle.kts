@@ -48,6 +48,9 @@ tasks {
         val jsStubFile = projectDir.resolve("src/jsInterop/js/stub.js")
         val ktFile = projectDir.resolve("src/jsInterop/kotlin/com/github/durun/screeps/arena/jsinterop/lib.kt")
 
+        inputs.file(ktFile)
+        outputs.file(jsInteropKlibFile)
+
         args(
             "-include-binary", jsStubFile,
             "-produce", "library",
