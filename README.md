@@ -5,12 +5,13 @@ Playing Screeps: Arena using Kotlin/Wasm
 ## Requirements
 
 - Gradle
+- bash
 
 ### Platform specific requirements
 
 #### Linux
 
-(TODO)
+- libtinfo5 (apt)
 
 #### Windows
 
@@ -49,9 +50,12 @@ Point the `screeps-arena-deploy` directory as Script folder in game.
 ![](https://gyazo.com/499bbf1d6ecc002001abc805aa553451.png)
 
 ## How to add script directory
+
 Copy [template](userScripts/template) into [userScripts](userScripts)
 
-If you want to use **arena specific class (ex. Flag)** , comment out the line in [build.gradle.kts](userScripts/template/build.gradle.kts)
+If you want to use **arena specific class (ex. Flag)** , comment out the line
+in [build.gradle.kts](userScripts/template/build.gradle.kts)
+
 ```kotlin
 project.ext["useFlag"] = true
 ```
