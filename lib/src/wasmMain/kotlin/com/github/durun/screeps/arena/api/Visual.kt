@@ -114,7 +114,7 @@ class Visual private constructor(private val index: Int) {
 
     fun text(text: String, pos: RoomPosition, style: TextStyle? = null): Visual {
         val textLength = text.toHeapUTF16(0)
-        val fontLength = style?.font?.toHeapUTF16(textLength)
+        val fontLength = style?.font?.toHeapUTF16(textLength + 2)
         visualText(
             this.index,
             pos.x, pos.y,

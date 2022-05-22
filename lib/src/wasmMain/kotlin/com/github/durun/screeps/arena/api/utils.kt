@@ -23,6 +23,7 @@ internal fun List<RoomPosition>.toHeap() {
  */
 internal fun String.toHeapUTF16(offset: Int): Int {
     val bytes = this.utf16.getBytes()
+        .let { it.sliceArray(0..(it.lastIndex - 2)) }
     bytes.forEachIndexed { i, byte ->
         toHeapUint8(offset + i, byte)
     }
