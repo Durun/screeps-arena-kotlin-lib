@@ -13,10 +13,6 @@ Playing Screeps: Arena using Kotlin/Wasm
 
 - libtinfo5 (apt)
 
-#### Windows
-
-(TODO)
-
 #### MacOS
 
 - XCode

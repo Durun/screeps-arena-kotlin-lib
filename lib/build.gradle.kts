@@ -43,7 +43,13 @@ tasks {
     val jsInterop by creating(Exec::class) {
         group = "develop"
         workingDir("./")
-        executable("${project.properties["konanHome"]}/bin/kotlinc-native")
+
+        val os = System.getProperty("os.name")
+        val executable = when {
+            os.startsWith("Windows") -> file(project.properties["konanHome"]!!).resolve("bin/kotlinc-native.bat")
+            else -> file(project.properties["konanHome"]!!).resolve("bin/kotlinc-native")
+        }
+        executable(executable)
 
         val jsStubFile = projectDir.resolve("src/jsInterop/js/stub.js")
         val ktFile = projectDir.resolve("src/jsInterop/kotlin/com/github/durun/screeps/arena/jsinterop/lib.kt")
